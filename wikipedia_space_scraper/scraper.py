@@ -47,10 +47,9 @@ def scrape_wikipedia_data():
                 # Scrap new data:
                 logging.info(f'{SCRIPT_NAME} - New data found for {scraped_date} (added to {PATH_TO_EXPORT}/{DATA_FILENAME})')
                 new_data.append(scrap_data(columns, date=scraped_date))
-        existing_data.extend(reversed(new_data))
-
-        # Export to JSON:
-        export_to_json(path=fr'{PATH_TO_EXPORT}/{DATA_FILENAME}', data=existing_data)
+        if new_data:
+            existing_data.extend(reversed(new_data))
+            export_to_json(path=fr'{PATH_TO_EXPORT}/{DATA_FILENAME}', data=existing_data)
 
     # Else scrap data from beginning:
     else:
@@ -66,3 +65,5 @@ def scrape_wikipedia_data():
             export_to_json(path=fr'{PATH_TO_EXPORT}/{DATA_FILENAME}', data=new_data)
 
     return f'[+] {SCRIPT_NAME} - Done'
+
+scrape_wikipedia_data()
