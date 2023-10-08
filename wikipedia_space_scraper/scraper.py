@@ -38,7 +38,7 @@ def scrape_wikipedia_data():
             if columns:
                 scraped_date = GoogleTranslator(source='fr', target='en').translate(columns[0].text.replace('\n', ''))
                 if scraped_date == last_date:
-                    print(f'[+] {SCRIPT_NAME} - Historical Data is up to date!')
+                    print(f'[+] {SCRIPT_NAME} - {DATA_FILENAME} is up to date!')
                     break
 
                 # Scrap new data:
