@@ -8,7 +8,7 @@ from wikipedia_space_scraper.scraper_utils import scraper_closure
 
 PATH_TO_EXPORT = 'data'
 DATA_FILENAME = "historical_data.json"
-SCRIPT_NAME = os.path.basename(os.getcwd())
+SCRIPT_NAME = 'Wikipedia_Space_Scraper'
 
 
 def scrape_wikipedia_data():
@@ -38,7 +38,7 @@ def scrape_wikipedia_data():
             if columns:
                 scraped_date = GoogleTranslator(source='fr', target='en').translate(columns[0].text.replace('\n', ''))
                 if scraped_date == last_date:
-                    print(f'[+] {SCRIPT_NAME} - Historical Data is now up to date!')
+                    print(f'[+] {SCRIPT_NAME} - Historical Data is up to date!')
                     break
 
                 # Scrap new data:
