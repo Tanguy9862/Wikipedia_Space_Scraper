@@ -65,5 +65,3 @@ def scrape_wikipedia_data():
             export_to_json(path=fr'{PATH_TO_EXPORT}/{DATA_FILENAME}', data=new_data)
 
     return f'[+] {SCRIPT_NAME} - Done'
-
-scrape_wikipedia_data()
