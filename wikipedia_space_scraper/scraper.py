@@ -6,7 +6,7 @@ from deep_translator import GoogleTranslator
 from tqdm import tqdm
 from wikipedia_space_scraper.scraper_utils import scraper_closure
 
-PATH_TO_EXPORT = '../data'
+PATH_TO_EXPORT = 'data'
 DATA_FILENAME = "historical_data.json"
 SCRIPT_NAME = os.path.basename(os.getcwd())
 
