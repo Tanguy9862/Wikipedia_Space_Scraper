@@ -1,7 +1,8 @@
-from bs4 import BeautifulSoup
-import requests
 import json
+import logging
 import os
+import requests
+from bs4 import BeautifulSoup
 from deep_translator import GoogleTranslator
 from tqdm import tqdm
 from wikipedia_space_scraper.scraper_utils import scraper_closure
@@ -9,6 +10,8 @@ from wikipedia_space_scraper.scraper_utils import scraper_closure
 PATH_TO_EXPORT = 'data'
 DATA_FILENAME = "historical_data.json"
 SCRIPT_NAME = 'Wikipedia_Space_Scraper'
+
+logging.basicConfig(level=logging.INFO)
 
 
 def scrape_wikipedia_data():
@@ -38,11 +41,11 @@ def scrape_wikipedia_data():
             if columns:
                 scraped_date = GoogleTranslator(source='fr', target='en').translate(columns[0].text.replace('\n', ''))
                 if scraped_date == last_date:
-                    print(f'[+] {SCRIPT_NAME} - {DATA_FILENAME} is up to date!')
+                    logging.info(f'{SCRIPT_NAME} - {DATA_FILENAME} is up to date!')
                     break
 
                 # Scrap new data:
-                print(f'[+] {SCRIPT_NAME} - New data found for {scraped_date} (added to {PATH_TO_EXPORT}/{DATA_FILENAME})')
+                logging.info(f'{SCRIPT_NAME} - New data found for {scraped_date} (added to {PATH_TO_EXPORT}/{DATA_FILENAME})')
                 new_data.append(scrap_data(columns, date=scraped_date))
         existing_data.extend(reversed(new_data))
 
@@ -51,7 +54,7 @@ def scrape_wikipedia_data():
 
     # Else scrap data from beginning:
     else:
-        print(f'[+] {SCRIPT_NAME} - No previous data found, scraping data from zero..')
+        logging.info(f'{SCRIPT_NAME} - No previous data found, scraping data from zero..')
         new_data_handler = scraper_closure()
         scrap_data = new_data_handler['scrap_data']
         export_to_json = new_data_handler['export_to_json']
